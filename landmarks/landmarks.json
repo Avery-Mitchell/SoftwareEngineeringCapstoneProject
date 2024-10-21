@@ -1,0 +1,20 @@
+[
+    {
+        "lat": 37.954758,
+        "lon": -91.776325,
+        "name": "Havener",
+        "image": "landmarks/pictures/havener.jpg"
+    },
+    {
+        "lat": 37.954143,
+        "lon": -91.776135,
+        "name": "Innovation Lab",
+        "image": "landmarks/pictures/innovation.jpg"
+    },
+    {
+        "lat": 37.954758,
+        "lon": -91.776325,
+        "name": "Havener",
+        "image": "landmarks/pictures/havener.jpg"
+    }
+]
