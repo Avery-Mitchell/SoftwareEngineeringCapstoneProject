@@ -1,397 +1,397 @@
 [
     {
         "name": "Allgood-Bailey Stadium",
-        "image": "AllgoodBaileyStadium.jpg",
+        "image": "landmarks/pictures/AllgoodBaileyStadium.jpg",
         "lat": 37.95026360972821,  
         "lon": -91.78055649332903
     },
     {
         "name": "Altman Hall",
-        "image": "AltmanHall.png",
+        "image": "landmarks/pictures/AltmanHall.png",
         "lat": 37.951181492785366, 
         "lon": -91.77542480974772 
     },
     {
         "name": "Athletic Field",
-        "image": "AthleticField.jpg",
+        "image": "landmarks/pictures/AthleticField.jpg",
         "lat": 37.948306720126205, 
         "lon": -91.77964480651993
     },
     {
         "name": "Baseball Field",
-        "image": "BaseballField.jpg",
+        "image": "landmarks/pictures/BaseballField.jpg",
         "lat": 37.94823200015863, 
         "lon": -91.77836122209416
     },
     {
         "name": "Bertelsmeyer Hall",
-        "image": "BertelsmeyerHall.jpg",
+        "image": "landmarks/pictures/BertelsmeyerHall.jpg",
         "lat": 37.95266650935608, 
         "lon": -91.77559142668693
     },
     {
         "name": "Butler-Carlton Civil Engineering Hall",
-        "image": "ButlerCarltonHall.jpg",
+        "image": "landmarks/pictures/ButlerCarltonHall.jpg",
         "lat": 37.95563564664213, 
         "lon": -91.7718397557403
     },
     {
         "name": "Campus Housing and Dining",
-        "image": "CampusHousingDining.png",
+        "image": "landmarks/pictures/CampusHousingDining.png",
         "lat": 37.95305840835873, 
         "lon": -91.77188440313319
     },
     {
         "name": "Castleman Hall",
-        "image": "CastlemanHall.jpg",
+        "image": "landmarks/pictures/CastlemanHall.jpg",
         "lat": 37.95173955316646, 
         "lon": -91.77422145220723
     },
     {
         "name": "Centennial Hall",
-        "image": "CentennialHall.jpg",
+        "image": "landmarks/pictures/CentennialHall.jpg",
         "lat": 37.95315173435247, 
         "lon": -91.77312962760931
     },
     {
         "name": "Chancellor's Residence",
-        "image": "ChancellorsResidence.jpg",
+        "image": "landmarks/pictures/ChancellorsResidence.jpg",
         "lat": 37.952659845662154, 
         "lon": -91.7746633612487
     },
     {
         "name": "Compressible Flow Laboratory",
-        "image": "CompressibleFlowBuilding.png",
+        "image": "landmarks/pictures/CompressibleFlowBuilding.png",
         "lat": 37.9586144738543, 
         "lon": -91.78194650646698
     },
     {
         "name": "Computer Science Building",
-        "image": "ComputerScienceBuilding.jpg",
+        "image": "landmarks/pictures/ComputerScienceBuilding.jpg",
         "lat": 37.95594988882233, 
         "lon": -91.77424839793368
     },
     {
         "name": "Curtis Laws Wilson Library",
-        "image": "CurtisWilsonLibrary.jpg",
+        "image": "landmarks/pictures/CurtisWilsonLibrary.jpg",
         "lat": 37.95561377361472, 
         "lon": -91.77348266739077
     },
     {
         "name": "Custodial and Landscape Services Building",
-        "image": "CustodialLandscapeServices.jpg",
+        "image": "landmarks/pictures/CustodialLandscapeServices.jpg",
         "lat": 37.95305742483613, 
         "lon": -91.77088037218338
     },
     {
         "name": "EcoVillage",
-        "image": "EcoVillage.jpg",
+        "image": "landmarks/pictures/EcoVillage.jpg",
         "lat": 37.951044215015536, 
         "lon": -91.78313514665139
     },
     {
         "name": "Emerson Electric Company Hall",
-        "image": "EmersonElectricHall.png",
+        "image": "landmarks/pictures/EmersonElectricHall.png",
         "lat": 37.9561963494714,
         "lon": -91.7729964205861
     },
     {
         "name": "Engineering Management Building",
-        "image": "EngineeringManagement.jpg",
+        "image": "landmarks/pictures/EngineeringManagement.jpg",
         "lat": 37.95533459005035, 
         "lon": -91.77504450910722
     },
     {
         "name": "Engineering Research Laboratory",
-        "image": "EngineeringResearchLab.png",
+        "image": "landmarks/pictures/EngineeringResearchLab.png",
         "lat": 37.956639294504804, 
         "lon": -91.77454881923714
     },
     {
         "name": "Farrar Hall",
-        "image": "FarrarHall.png",
+        "image": "landmarks/pictures/FarrarHall.png",
         "lat": 37.95097104813238, 
         "lon": -91.77569885847856
     },
     {
         "name": "Fitness Center",
-        "image": "FitnessCenter.jpg",
+        "image": "landmarks/pictures/FitnessCenter.jpg",
         "lat": 37.95075185833349, 
         "lon": -91.77863403140844
     },
     {
         "name": "Fulton Hall",
-        "image": "FultonHall.jpg",
+        "image": "landmarks/pictures/FultonHall.jpg",
         "lat": 37.9549565724069,
         "lon": -91.7731005121624
     },
     {
         "name": "Gale Bullman Building",
-        "image": "GaleBullmanBuilding.jpg",
+        "image": "landmarks/pictures/GaleBullmanBuilding.jpg",
         "lat": 37.9509825995257, 
         "lon": -91.77836932610603
     },
     {
         "name": "General Services Building",
-        "image": "GeneralServices.jpg",
+        "image": "landmarks/pictures/GeneralServices.jpg",
         "lat": 37.95816461284897, 
         "lon": -91.78853884285189
     },
     {
         "name": "Harris Hall",
-        "image": "HarrisHall.jpg",
+        "image": "landmarks/pictures/HarrisHall.jpg",
         "lat": 37.95460039260541, 
         "lon": -91.77463242505814
     },
     {
         "name": "Hasselmann Alumni House",
-        "image": "HasselmannAlumniHouse.jpg",
+        "image": "landmarks/pictures/HasselmannAlumniHouse.jpg",
         "lat": 37.95253090530078, 
         "lon": -91.77138256017713
     },
     {
         "name": "Havener Center",
-        "image": "HavenerCenter.jpg",
+        "image": "landmarks/pictures/HavenerCenter.jpg",
         "lat": 37.9548490952457,
         "lon": -91.776188813217
     },
     {
         "name": "Humanities and Social Sciences Building",
-        "image": "HumanitiesSocialSciences.jpg",
+        "image": "landmarks/pictures/HumanitiesSocialSciences.jpg",
         "lat": 37.955330387393275, 
         "lon": -91.77423307217039
     },
     {
         "name": "Innovation Lab",
-        "image": "InnovationLab.jpg",
+        "image": "landmarks/pictures/InnovationLab.jpg",
         "lat": 37.9542329345858,
         "lon": -91.77608212153
     },
     {
         "name": "Interdisciplinary Engineering Building",
-        "image": "InterdisciplinaryEngineering.jpg",
+        "image": "landmarks/pictures/InterdisciplinaryEngineering.jpg",
         "lat": 37.95393495715077, 
         "lon": -91.77202464057062
     },
     {
         "name": "Jack Carney Puck and Plaza",
-        "image": "JackCarneyPuckPlaza.png",
+        "image": "landmarks/pictures/JackCarneyPuckPlaza.png",
         "lat": 37.953749714936095, 
         "lon": -91.7735359233496
     },
     {
         "name": "Kennedy Experimental Mine",
-        "image": "KennedyExperimentalMine.png",
+        "image": "landmarks/pictures/KennedyExperimentalMine.png",
         "lat": 37.93703581777998, 
         "lon": -91.79123861994488
     },
     {
         "name": "Kummer Student Design Center",
-        "image": "KummerStudentDesignCenter.jpg",
+        "image": "landmarks/pictures/KummerStudentDesignCenter.jpg",
         "lat": 37.95178064813689, 
         "lon": -91.7777148690182
     },
     {
         "name": "MSTR",
-        "image": "MSTR.jpg",
+        "image": "landmarks/pictures/MSTR.jpg",
         "lat": 37.95459833989735, 
         "lon": -91.77252976534834
     },
     {
         "name": "McNutt Hall",
-        "image": "McNuttHall.png",
+        "image": "landmarks/pictures/McNuttHall.png",
         "lat": 37.95583740613376, 
         "lon": -91.77603435103742
     },
     {
         "name": "Millennium Arch",
-        "image": "MillenniumArch.jpg",
+        "image": "landmarks/pictures/MillenniumArch.jpg",
         "lat": 37.95171958498834, 
         "lon": -91.77480057003815
     },
     {
         "name": "Miner Alumni Association",
-        "image": "MinerAlumniAssociation.jpg",
+        "image": "landmarks/pictures/MinerAlumniAssociation.jpg",
         "lat": 37.95346735121969, 
         "lon": -91.77111291000271
     },
     {
         "name": "Miner Dome Indoor Practice Facility",
-        "image": "MinerDome.jpg",
+        "image": "landmarks/pictures/MinerDome.jpg",
         "lat": 37.94982939036453, 
         "lon": -91.77874158833123
     },
     {
         "name": "Miner Village",
-        "image": "MinerVillage.jpg",
+        "image": "landmarks/pictures/MinerVillage.jpg",
         "lat": 37.95914527732766, 
         "lon": -91.78022585572927
     },
     {
         "name": "Missouri S&T Printing and Mail Services",
-        "image": "MissouriSTPrintingMailServices.png",
+        "image": "landmarks/pictures/MissouriSTPrintingMailServices.png",
         "lat": 37.95004234459678, 
         "lon": -91.76877748473564
     },
     {
         "name": "Norwood Hall",
-        "image": "NorwoodHall.jpg",
+        "image": "landmarks/pictures/NorwoodHall.jpg",
         "lat": 37.953636330350605, 
         "lon": -91.77282242484449
     },
     {
         "name": "Observatory",
-        "image": "Observatory.JPG",
+        "image": "landmarks/pictures/Observatory.JPG",
         "lat": 37.956836478673516, 
         "lon": -91.77571226403604
     },
     {
         "name": "Parker Hall",
-        "image": "ParkerHall.jpg",
+        "image": "landmarks/pictures/ParkerHall.jpg",
         "lat": 37.954424410159746, 
         "lon": -91.77310898243668
     },
     {
         "name": "Pedestrian Bridge",
-        "image": "PedestrianBridge.jpg",
+        "image": "landmarks/pictures/PedestrianBridge.jpg",
         "lat": 37.95625785909638, 
         "lon": -91.78185384782401
     },
     {
         "name": "Physics Building",
-        "image": "PhysicsBuilding.jpg",
+        "image": "landmarks/pictures/PhysicsBuilding.jpg",
         "lat": 37.95497231427167, 
         "lon": -91.77210238046733
     },
     {
         "name": "Pine Building",
-        "image": "PineBuilding.png",
+        "image": "landmarks/pictures/PineBuilding.png",
         "lat": 37.95454828239458, 
         "lon": -91.77118751204685
     },
     {
         "name": "Recreational Sports Fields",
-        "image": "RecreationalSportsFields.png",
+        "image": "landmarks/pictures/RecreationalSportsFields.png",
         "lat": 37.94920531917845, 
         "lon": -91.77798515748482
     },
     {
         "name": "Residential Commons 1",
-        "image": "ResidentialCommons1.jpg",
+        "image": "landmarks/pictures/ResidentialCommons1.jpg",
         "lat": 37.955735745770696, 
         "lon": -91.77739684973471
     },
     {
         "name": "Residential Commons 2",
-        "image": "ResidentialCommons2.jpg",
+        "image": "landmarks/pictures/ResidentialCommons2.jpg",
         "lat": 37.95642989238312, 
         "lon": -91.77779875216689
     },
     {
         "name": "Rock Mechanics and Explosives Research Center",
-        "image": "RockMechanicsExplosivesResearchCenter.jpg",
+        "image": "landmarks/pictures/RockMechanicsExplosivesResearchCenter.jpg",
         "lat": 37.94712638906689, 
         "lon": -91.77930865665856
     },
     {
         "name": "Rolla Building",
-        "image": "RollaBuilding.png",
+        "image": "landmarks/pictures/RollaBuilding.png",
         "lat": 37.953544702005615, 
         "lon": -91.77411630914142
     },
     {
         "name": "Rolla Suites Building 1",
-        "image": "RollaSuites1.jpg",
+        "image": "landmarks/pictures/RollaSuites1.jpg",
         "lat": 37.95280785505092, 
         "lon": -91.77226346301975
     },
     {
         "name": "Rolla Suites Building 2",
-        "image": "RollaSuites2.jpg",
+        "image": "landmarks/pictures/RollaSuites2.jpg",
         "lat": 37.95263654236841, 
         "lon": -91.77225273418438
     },
     {
         "name": "Schrenk Hall",
-        "image": "SchrenkHall.jpg",
+        "image": "landmarks/pictures/SchrenkHall.jpg",
         "lat": 37.952932987836036, 
         "lon": -91.7738690381829
     },
     {
         "name": "Soccer Field",
-        "image": "SoccerField.jpg",
+        "image": "landmarks/pictures/SoccerField.jpg",
         "lat": 37.949330833945005, 
         "lon": -91.77947686652644
     },
     {
         "name": "Softball Field",
-        "image": "SoftballField.jpg",
+        "image": "landmarks/pictures/SoftballField.jpg",
         "lat": 37.94755177739371, 
         "lon": -91.78026534728691
     },
     {
         "name": "Solar Village",
-        "image": "SolarVillage.png",
+        "image": "landmarks/pictures/SolarVillage.png",
         "lat": 37.951700321269136, 
         "lon": -91.77988612761163
     },
     {
         "name": "Stonehenge",
-        "image": "Stonehenge.jpg",
+        "image": "landmarks/pictures/Stonehenge.jpg",
         "lat": 37.956353030062054, 
         "lon": -91.77655643670302
     },
     {
         "name": "Straumanis-James Hall",
-        "image": "StraumanisJamesHall.png",
+        "image": "landmarks/pictures/StraumanisJamesHall.png",
         "lat": 37.95631945088974, 
         "lon": -91.77408678378632
     },
     {
         "name": "Student Diversity Initiatives Center",
-        "image": "StudentDiversityInitiativesCenter.png",
+        "image": "landmarks/pictures/StudentDiversityInitiativesCenter.png",
         "lat": 37.95207275219597, 
         "lon": -91.77588489886475
     },
     {
         "name": "Student Health Complex",
-        "image": "StudentHealthComplex.jpg",
+        "image": "landmarks/pictures/StudentHealthComplex.jpg",
         "lat": 37.95186648221487, 
         "lon": -91.78106041609449
     },
     {
         "name": "Student Recreation Center",
-        "image": "StudentRecreationCenter.jpg",
+        "image": "landmarks/pictures/StudentRecreationCenter.jpg",
         "lat": 37.95095265243288, 
         "lon": -91.77840158723333
     },
     {
         "name": "Technology Development Center",
-        "image": "TechnologyDevelopmentCenter.jpg",
+        "image": "landmarks/pictures/TechnologyDevelopmentCenter.jpg",
         "lat": 37.9509487908877,
         "lon": -91.7843846636726
     },
     {
         "name": "Temporary Research Facility",
-        "image": "TemporaryResearchFacility.png",
+        "image": "landmarks/pictures/TemporaryResearchFacility.png",
         "lat": 37.953485695332965, 
         "lon": -91.77123219051357
     },
     {
         "name": "Thomas Jefferson Residence Hall",
-        "image": "ThomasJeffersonResidenceHall.jpg",
+        "image": "landmarks/pictures/ThomasJeffersonResidenceHall.jpg",
         "lat": 37.9597313163234, 
         "lon": -91.77171500163595
     },
     {
         "name": "Toomey Hall",
-        "image": "ToomeyHall.jpg",
+        "image": "landmarks/pictures/ToomeyHall.jpg",
         "lat": 37.9544145541302,
         "lon": -91.7740923525492
     },
     {
         "name": "University Commons",
-        "image": "UniversityCommons.jpg",
+        "image": "landmarks/pictures/UniversityCommons.jpg",
         "lat": 37.95575369076778, 
         "lon": -91.77963093272757
     }
