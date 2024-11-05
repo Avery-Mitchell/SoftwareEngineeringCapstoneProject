@@ -1,12 +1,8 @@
-# to install dependencies, type "pip install {dependency_name} in your terminal"
-# for example: pip install pygame
-
-import pygame # for user interface and interaction -> maybe subject to removal
 import requests # for api calls 
 import folium # for displaying the map from OpenStreetMap
 import os # for accessing files that are saved by the program
 import webbrowser # for opening stuff in the browser
-import json
+import json # for using the landmarks json
 
 def init_map(map_file, center_lat, center_long, zoom_level):
     # Create a Folium map
