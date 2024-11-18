@@ -7,10 +7,36 @@ import json # for using the landmarks json
 
 # TODO:
 # - need to fix legend functionality - either label each location with num or add the ability to click
+# - add precipitation to the weather section
+
+with open('api-key.txt', 'r') as z:
+    WEATHER_API_KEY = z.read()
+
+def get_current_weather(lat, lon):
+    # WeatherAPI requires specifying the location in "lat,lon" format
+    url = f"https://api.weatherapi.com/v1/current.json?key={WEATHER_API_KEY}&q={lat},{lon}&aqi=no"
+    response = requests.get(url)
+    weather_data = response.json()
+
+    # Check if the API call was successful
+    if response.status_code == 200 and "current" in weather_data:
+        # Extract necessary weather data
+        weather = {
+            "temperature": weather_data["current"]["temp_f"],  # Temperature in Fahrenheit
+            "description": weather_data["current"]["condition"]["text"],
+            "humidity": weather_data["current"]["humidity"],
+            "wind_speed": weather_data["current"]["wind_mph"]
+        }
+        return weather
+    else:
+        print("Error fetching weather data:", weather_data)
+        return None
 
 def init_map(map_file, center_lat, center_long, zoom_level):
     # CREATES THE MAP
     map = folium.Map(location=[center_lat, center_long], zoom_start=zoom_level)
+
+    weather = get_current_weather(center_lat, center_long)
 
     # OPENS THE LANDMARKS JSON
     with open('landmarks/landmarks.json') as f:
@@ -26,7 +52,7 @@ def init_map(map_file, center_lat, center_long, zoom_level):
             border:2px solid grey; z-index:9999; font-size:14px;
             padding: 10px;
         ">
-        <h4>Legend</h4>
+        <h2><b>Legend</b></h2>
         '''
         for idx, landmark in enumerate(landmarks):
             name = landmark["name"]
@@ -49,6 +75,39 @@ def init_map(map_file, center_lat, center_long, zoom_level):
         }
     </script>
     '''
+
+    def generate_weather_html(weather):
+        if weather:
+            weather_html = f'''
+            <div style="
+                position: fixed; 
+                bottom: 10px; right: 10px; width: 250px; height: 160px; 
+                background-color: white; 
+                border:2px solid grey; z-index:9999; font-size:14px;
+                padding: 10px;
+            ">
+            <h2><b>Current Weather in Rolla</b></h2>
+            <p>Temperature: {weather["temperature"]} °F</p>
+            <p>Condition: {weather["description"]}</p>
+            <p>Humidity: {weather["humidity"]}%</p>
+            </div>
+            '''
+        else:
+            weather_html = '''
+            <div style="
+                position: fixed; 
+                bottom: 10px; right: 10px; width: 250px; height: auto; 
+                background-color: white; 
+                border:2px solid grey; z-index:9999; font-size:14px;
+                padding: 10px;
+            ">
+            <h4>Weather Information Unavailable</h4>
+            </div>
+            '''
+        return weather_html
+
+    weather_html = generate_weather_html(weather)
+    map.get_root().html.add_child(folium.Element(weather_html))
 
     map.get_root().html.add_child(folium.Element(pan_to_js))
     legend_html = generate_legend_html(landmarks)
