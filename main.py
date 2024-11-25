@@ -1,13 +1,14 @@
 import requests # for api calls 
 import folium # for displaying the map from OpenStreetMap
-from folium import IFrame, Popup, Element # for the legend and other overlays
+from folium import IFrame, Popup, Element, FeatureGroup # for the legend and other overlays
+from folium.plugins import Search # for the search bar
 import os # for accessing files that are saved by the program
 import webbrowser # for opening stuff in the browser
 import json # for using the landmarks json
 
 # TODO:
-# - need to fix legend functionality - either label each location with num or add the ability to click
-# - add precipitation to the weather section
+# - remove blue markers that appear from geojson
+# - make the search bar look better
 
 with open('api-key.txt', 'r') as z:
     WEATHER_API_KEY = z.read()
@@ -140,6 +141,61 @@ def init_map(map_file, center_lat, center_long, zoom_level):
             popup=folium.Popup(popup_content, max_width=300),
             icon=icon
         ).add_to(map)
+
+    geojson_data = {
+        "type": "FeatureCollection",
+        "features": []
+    }
+
+    for landmark in landmarks:
+        feature = {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [landmark["lon"], landmark["lat"]]
+            },
+            "properties": {
+                "name": landmark["name"],
+                "image": landmark["image"]
+            }
+        }
+        geojson_data["features"].append(feature)
+    
+    geojson_layer = folium.GeoJson(
+        geojson_data,
+        name="Landmarks",
+        popup=None,
+        tooltip=None
+    ).add_to(map)
+
+    Search(
+        layer=geojson_layer,
+        geom_type='Point',
+        placeholder='Search bar...',
+        collapsed=False,
+        position='topright',
+        search_label='name',
+        move_to_location=True,
+        zoom=17
+    ).add_to(map)
+
+    search_bar_css = """
+    <style>
+        .leaflet-control-search {
+            font-size: 16px; /* Adjust font size */
+            width: 275px; /* Adjust width */
+        }
+        .leaflet-control-search input {
+            height: 30px; /* Adjust height of input box */
+            font-size: 16px; /* Adjust font size of input text */
+        }
+        .leaflet-control-search .search-button {
+            width: 30px; /* Adjust button size */
+            height: 30px;
+        }
+    </style>
+    """
+    map.get_root().html.add_child(folium.Element(search_bar_css))
 
     map.save(map_file)
     webbrowser.open('file://' + os.path.realpath(map_file))
