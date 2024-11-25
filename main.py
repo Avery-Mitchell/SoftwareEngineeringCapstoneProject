@@ -13,14 +13,12 @@ with open('api-key.txt', 'r') as z:
     WEATHER_API_KEY = z.read()
 
 def get_current_weather(lat, lon):
-    # WeatherAPI requires specifying the location in "lat,lon" format
     url = f"https://api.weatherapi.com/v1/current.json?key={WEATHER_API_KEY}&q={lat},{lon}&aqi=no"
     response = requests.get(url)
     weather_data = response.json()
 
-    # Check if the API call was successful
+    # CHECK IF THE API CALL WAS SUCCESSFUL
     if response.status_code == 200 and "current" in weather_data:
-        # Extract necessary weather data
         weather = {
             "temperature": weather_data["current"]["temp_f"],  # Temperature in Fahrenheit
             "description": weather_data["current"]["condition"]["text"],
@@ -54,19 +52,16 @@ def init_map(map_file, center_lat, center_long, zoom_level):
         ">
         <h2><b>Legend</b></h2>
         '''
-        for idx, landmark in enumerate(landmarks):
+        for idx, landmark in enumerate(landmarks, start=1):
             name = landmark["name"]
             lat = landmark["lat"]
             lon = landmark["lon"]
             color = "red"
-            legend_html += f'''
-                <i class="fa fa-map-marker fa-2x" style="color:{color}; cursor: pointer;" 
-                onclick="panToLocation({lat}, {lon})"></i> 
-                <span style="cursor: pointer;" onclick="panToLocation({lat}, {lon})">{name}</span><br>
-            '''
+            legend_html += f'<b>{idx}.</b> {name}<br>'
         legend_html += "</div>"
         return legend_html
     
+    # MOVES MAP WHEN LEGEND IS CLICKED - NOT WORKING 
     pan_to_js = '''
     <script>
         var map = L.DomUtil.get('map');  
@@ -76,6 +71,7 @@ def init_map(map_file, center_lat, center_long, zoom_level):
     </script>
     '''
 
+    # GENERATES WEATHER
     def generate_weather_html(weather):
         if weather:
             weather_html = f'''
@@ -106,27 +102,43 @@ def init_map(map_file, center_lat, center_long, zoom_level):
             '''
         return weather_html
 
+    # ADDS WEATHER TO MAP
     weather_html = generate_weather_html(weather)
     map.get_root().html.add_child(folium.Element(weather_html))
 
+    # ADDS LEGEND TO MAP
     map.get_root().html.add_child(folium.Element(pan_to_js))
     legend_html = generate_legend_html(landmarks)
     map.get_root().html.add_child(folium.Element(legend_html))
 
-    # ADDS THE LEGEND ITEMS TO THE MAP
-    for idx, landmark in enumerate(landmarks):
+    # ADDS THE LEGEND ITEMS TO MAP
+    for idx, landmark in enumerate(landmarks, start=1):
         lat = landmark["lat"]
         lon = landmark["lon"]
         name = landmark["name"]
         image = landmark["image"]
-        color = "red"
+        
+        icon_html = f'''
+        <div style="
+            background-color: red; 
+            color: white; 
+            font-weight: bold; 
+            border-radius: 50%; 
+            text-align: center; 
+            width: 24px; 
+            height: 24px; 
+            line-height: 24px; 
+            border: 2px solid white;">
+            {idx}
+        </div>
+        '''
+        icon = folium.DivIcon(html=icon_html)
 
-        popup_content = f"<strong>{name}</strong><br><img src='{image}' width='100'/>"
-    
+        popup_content = f"<strong>{idx}. {name}</strong><br><img src='{image}' width='100'/>"
         folium.Marker(
             location=[lat, lon],
             popup=folium.Popup(popup_content, max_width=300),
-            icon=folium.Icon(color=color)
+            icon=icon
         ).add_to(map)
 
     map.save(map_file)
