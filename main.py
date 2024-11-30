@@ -46,59 +46,139 @@ def init_map(map_file, center_lat, center_long, zoom_level):
         legend_html = '''
         <div style="
             position: fixed; 
-            bottom: 50px; left: 50px; width: 300px; height: 750px; 
-            overflow-y: scroll; background-color: white;  
-            border:2px solid grey; z-index:9999; font-size:14px;
-            padding: 10px;
+            bottom: 50px; left: 50px; 
+            width: 300px; height: 400px; 
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-radius: 10px; 
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); 
+            z-index: 9999; 
+            font-family: Arial, sans-serif; 
+            padding: 15px; 
+            overflow-y: auto;
         ">
-        <h2><b>Legend</b></h2>
+            <h3 style="
+                margin: 0 0 10px 0; 
+                font-size: 18px; 
+                color: #333; 
+                text-align: center;
+            ">
+                🗺️ Legend
+            </h3>
+            <hr style="
+                margin: 10px 0; 
+                border: none; 
+                border-top: 1px solid #ddd;
+            ">
         '''
         for idx, landmark in enumerate(landmarks, start=1):
             name = landmark["name"]
             lat = landmark["lat"]
             lon = landmark["lon"]
-            color = "red"
-            legend_html += f'<b>{idx}.</b> {name}<br>'
-        legend_html += "</div>"
+            color = "red"  # Placeholder color
+
+            legend_html += f'''
+            <div style="
+                margin-bottom: 10px; 
+                padding: 10px; 
+                background-color: rgba(240, 240, 240, 0.9); 
+                border-radius: 5px; 
+                border-left: 4px solid {color}; 
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            ">
+                <strong style="font-size: 14px; color: #333;">{idx}. {name}</strong>
+            </div>
+            '''
+
+        legend_html += '</div>'
         return legend_html
     
-    # MOVES MAP WHEN LEGEND IS CLICKED - NOT WORKING 
-    pan_to_js = '''
-    <script>
-        var map = L.DomUtil.get('map');  
-        function panToLocation(lat, lon) {
-            map._leaflet_map.setView([lat, lon], 17);  
-        }
-    </script>
-    '''
-
     # GENERATES WEATHER
     def generate_weather_html(weather):
         if weather:
             weather_html = f'''
             <div style="
                 position: fixed; 
-                bottom: 10px; right: 10px; width: 250px; height: 160px; 
-                background-color: white; 
-                border:2px solid grey; z-index:9999; font-size:14px;
-                padding: 10px;
+                bottom: 10px; right: 10px; 
+                width: 260px; 
+                background-color: rgba(255, 255, 255, 0.9); 
+                border-radius: 10px; 
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); 
+                z-index: 9999; 
+                font-family: Arial, sans-serif; 
+                padding: 15px; 
             ">
-            <h2><b>Current Weather in Rolla</b></h2>
-            <p>Temperature: {weather["temperature"]} °F</p>
-            <p>Condition: {weather["description"]}</p>
-            <p>Humidity: {weather["humidity"]}%</p>
+                <h3 style="
+                    margin: 0; 
+                    font-size: 18px; 
+                    color: #333;
+                    text-align: center;
+                ">
+                    🌤 Current Weather in Rolla
+                </h3>
+                <hr style="
+                    margin: 10px 0; 
+                    border: none; 
+                    border-top: 1px solid #ddd;
+                ">
+                <p style="
+                    margin: 5px 0; 
+                    font-size: 14px; 
+                    color: #555;
+                ">
+                    <strong>Temperature:</strong> {weather["temperature"]} °F
+                </p>
+                <p style="
+                    margin: 5px 0; 
+                    font-size: 14px; 
+                    color: #555;
+                ">
+                    <strong>Condition:</strong> {weather["description"]}
+                </p>
+                <p style="
+                    margin: 5px 0; 
+                    font-size: 14px; 
+                    color: #555;
+                ">
+                    <strong>Humidity:</strong> {weather["humidity"]}%
+                </p>
+                <p style="
+                    margin: 5px 0; 
+                    font-size: 14px; 
+                    color: #555;
+                ">
+                    <strong>Wind Speed:</strong> {weather["wind_speed"]} mph
+                </p>
             </div>
             '''
         else:
             weather_html = '''
             <div style="
                 position: fixed; 
-                bottom: 10px; right: 10px; width: 250px; height: auto; 
-                background-color: white; 
-                border:2px solid grey; z-index:9999; font-size:14px;
-                padding: 10px;
+                bottom: 10px; right: 10px; 
+                width: 260px; 
+                background-color: rgba(255, 255, 255, 0.9); 
+                border-radius: 10px; 
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); 
+                z-index: 9999; 
+                font-family: Arial, sans-serif; 
+                padding: 15px; 
             ">
-            <h4>Weather Information Unavailable</h4>
+                <h3 style="
+                    margin: 0; 
+                    font-size: 18px; 
+                    color: #333;
+                    text-align: center;
+                ">
+                    🚫 Weather Unavailable
+                </h3>
+                <p style="
+                    margin: 5px 0; 
+                    font-size: 14px; 
+                    color: #555;
+                    text-align: center;
+                ">
+                    Unable to fetch weather information at this time.
+                </p>
             </div>
             '''
         return weather_html
@@ -181,17 +261,52 @@ def init_map(map_file, center_lat, center_long, zoom_level):
 
     search_bar_css = """
     <style>
+        /* Main container for the search control */
         .leaflet-control-search {
+            font-family: Arial, sans-serif; /* Use a clean, modern font */
             font-size: 16px; /* Adjust font size */
-            width: 275px; /* Adjust width */
+            width: 325px; /* Make the search bar container wider */
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+            border-radius: 8px; /* Add rounded corners */
+            padding: 5px; /* Add padding inside the container */
         }
+        
+        /* Input box styling */
         .leaflet-control-search input {
-            height: 30px; /* Adjust height of input box */
-            font-size: 16px; /* Adjust font size of input text */
+            width: 250px; /* Make the text input box wider */
+            height: 35px; /* Adjust height of input box */
+            font-size: 14px; /* Adjust font size of input text */
+            border: 1px solid #ccc; /* Light gray border */
+            border-radius: 4px; /* Rounded corners */
+            padding-left: 10px; /* Add padding inside */
+            outline: none; /* Remove default outline */
         }
+        .leaflet-control-search input:focus {
+            border-color: #007bff; /* Highlighted border color on focus */
+            box-shadow: 0 0 4px #007bff; /* Subtle glow effect */
+        }
+        
+        /* Search button styling */
         .leaflet-control-search .search-button {
-            width: 30px; /* Adjust button size */
-            height: 30px;
+            width: 30px; /* Slightly larger button size */
+            height: 30px; /* Make button size proportional */
+            background-color: #007bff; /* Blue background */
+            border: none; /* Remove border */
+            border-radius: 50%; /* Circular button */
+            margin-left: 10px; /* Increase space between input and button */
+            cursor: pointer; /* Pointer cursor on hover */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .leaflet-control-search .search-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+        .leaflet-control-search .search-button:before {
+            content: ""; /* Use a magnifying glass icon */
+            font-size: 18px; /* Adjust icon size */
+            color: white; /* White icon color */
+            text-shadow: none; /* Ensure no drop shadow on the icon */
         }
     </style>
     """
