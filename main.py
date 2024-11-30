@@ -1,17 +1,54 @@
 import requests # for api calls 
 import folium # for displaying the map from OpenStreetMap
 from folium import IFrame, Popup, Element, FeatureGroup # for the legend and other overlays
-from folium.plugins import Search # for the search bar
+from folium.plugins import Search, PolyLineFromEncoded, MousePosition # for the search bar and route navigation
 import os # for accessing files that are saved by the program
 import webbrowser # for opening stuff in the browser
 import json # for using the landmarks json
+import polyline
 
 # TODO:
 # - remove blue markers that appear from geojson
-# - make the search bar look better
 
-with open('api-key.txt', 'r') as z:
+with open('weatherapi.txt', 'r') as z:
     WEATHER_API_KEY = z.read()
+
+with open('directionsapi.txt', 'r') as z:
+    DIRECTIONS_API_KEY = z.read()
+
+def get_route(DIRECTIONS_API_KEY, start_coords, end_coords):
+    url = "https://api.openrouteservice.org/v2/directions/foot-walking"
+    headers = {
+        "Authorization": DIRECTIONS_API_KEY,
+        "Content-Type": "application/json"
+    }
+    body = {
+        "coordinates": [start_coords, end_coords],
+        "instructions": "false"
+    }
+    response = requests.post(url, headers=headers, json=body)
+
+    if response.status_code == 200:
+        data = response.json()
+        encoded_polyline = data['routes'][0]['geometry']
+        decoded_polyline = polyline.decode(encoded_polyline)
+        return decoded_polyline
+    else:
+        print("Error fetching walking route:", response.json())
+        return None
+
+def calculate_route(map, start_coords, end_coords):
+    route_coords = get_route(DIRECTIONS_API_KEY, start_coords, end_coords)
+    if route_coords:
+        folium.PolyLine(
+            route_coords,
+            color="blue",
+            weight=5,
+            opacity=0.8
+        ).add_to(map)
+        print("Route added to the map.")
+    else:
+        print("Failed to fetch or draw route.")
 
 def get_current_weather(lat, lon):
     url = f"https://api.weatherapi.com/v1/current.json?key={WEATHER_API_KEY}&q={lat},{lon}&aqi=no"
@@ -188,7 +225,6 @@ def init_map(map_file, center_lat, center_long, zoom_level):
     map.get_root().html.add_child(folium.Element(weather_html))
 
     # ADDS LEGEND TO MAP
-    map.get_root().html.add_child(folium.Element(pan_to_js))
     legend_html = generate_legend_html(landmarks)
     map.get_root().html.add_child(folium.Element(legend_html))
 
@@ -310,6 +346,58 @@ def init_map(map_file, center_lat, center_long, zoom_level):
         }
     </style>
     """
+
+    # HTML for navigation bar
+    nav_bar_html = """
+    <div style="
+        position: fixed;
+        top: 10px; left: 50%; transform: translateX(-50%);
+        background-color: rgba(255, 255, 255, 0.8); padding: 10px;
+        z-index: 9999; font-family: Arial, sans-serif; border-radius: 5px;">
+        <form id="routeForm">
+            <label for="startLocation">Start Location (lat, lon):</label><br>
+            <input type="text" id="startLocation" name="startLocation" placeholder="Enter coordinates (e.g. 37.95618, -91.77618)" required><br><br>
+            <label for="endLocation">End Location (lat, lon):</label><br>
+            <input type="text" id="endLocation" name="endLocation" placeholder="Enter coordinates (e.g. 37.9525, -91.7745)" required><br><br>
+            <button type="button" onclick="getRoute()">Get Walking Directions</button>
+        </form>
+    </div>
+    <script>
+        function getRoute() {
+            var startLoc = document.getElementById("startLocation").value.split(',');
+            var endLoc = document.getElementById("endLocation").value.split(',');
+
+            if (startLoc.length === 2 && endLoc.length === 2) {
+                var startLat = parseFloat(startLoc[0].trim());
+                var startLon = parseFloat(startLoc[1].trim());
+                var endLat = parseFloat(endLoc[0].trim());
+                var endLon = parseFloat(endLoc[1].trim());
+
+                if (!isNaN(startLat) && !isNaN(startLon) && !isNaN(endLat) && !isNaN(endLon)) {
+                    window.selectedStart = [startLon, startLat];
+                    window.selectedEnd = [endLon, endLat];
+
+                    // Update the map with new markers
+                    var startMarker = L.marker(window.selectedStart).addTo(map);
+                    startMarker.bindPopup('Start Location').openPopup();
+
+                    var endMarker = L.marker(window.selectedEnd).addTo(map);
+                    endMarker.bindPopup('End Location').openPopup();
+
+                    // Call Python function to calculate the route
+                    google.colab.kernel.invokeFunction('calc_route', [window.selectedStart, window.selectedEnd], {});
+                } else {
+                    alert("Please enter valid coordinates.");
+                }
+            } else {
+                alert("Please enter both start and end coordinates in the correct format.");
+            }
+        }
+    </script>
+    """
+
+    map.get_root().html.add_child(Element(nav_bar_html))
+
     map.get_root().html.add_child(folium.Element(search_bar_css))
 
     map.save(map_file)
