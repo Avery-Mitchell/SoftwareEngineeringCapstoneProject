@@ -32,9 +32,10 @@ def get_route(DIRECTIONS_API_KEY, start_coords, end_coords):
         data = response.json()
         encoded_polyline = data['routes'][0]['geometry']
         decoded_polyline = polyline.decode(encoded_polyline)
+        print("Fetched walking route")
         return decoded_polyline
     else:
-        print("Error fetching walking route:", response.json())
+        print("Error fetching walking route:", response.status_code, response.text)
         return None
 
 def calculate_route(map, start_coords, end_coords):
@@ -347,59 +348,51 @@ def init_map(map_file, center_lat, center_long, zoom_level):
     </style>
     """
 
+    landmarks_json = json.dumps(landmarks)
+
     # HTML for navigation bar
-    nav_bar_html = """
+    nav_bar_html = f"""
     <div style="
         position: fixed;
         top: 10px; left: 50%; transform: translateX(-50%);
         background-color: rgba(255, 255, 255, 0.8); padding: 10px;
         z-index: 9999; font-family: Arial, sans-serif; border-radius: 5px;">
         <form id="routeForm">
-            <label for="startLocation">Start Location (lat, lon):</label><br>
-            <input type="text" id="startLocation" name="startLocation" placeholder="Enter coordinates (e.g. 37.95618, -91.77618)" required><br><br>
-            <label for="endLocation">End Location (lat, lon):</label><br>
-            <input type="text" id="endLocation" name="endLocation" placeholder="Enter coordinates (e.g. 37.9525, -91.7745)" required><br><br>
+            <label for="startLocation">Start Location:</label><br>
+            <select id="startLocation" name="startLocation" required>
+                <option value="" disabled selected>Select start location</option>
+            </select><br><br>
+            <label for="endLocation">End Location:</label><br>
+            <select id="endLocation" name="endLocation" required>
+                <option value="" disabled selected>Select end location</option>
+            </select><br><br>
             <button type="button" onclick="getRoute()">Get Walking Directions</button>
         </form>
     </div>
     <script>
-        function getRoute() {
-            var startLoc = document.getElementById("startLocation").value.split(',');
-            var endLoc = document.getElementById("endLocation").value.split(',');
+        const landmarks = { landmarks_json }; // Inject landmarks from Python
 
-            if (startLoc.length === 2 && endLoc.length === 2) {
-                var startLat = parseFloat(startLoc[0].trim());
-                var startLon = parseFloat(startLoc[1].trim());
-                var endLat = parseFloat(endLoc[0].trim());
-                var endLon = parseFloat(endLoc[1].trim());
+        const startDropdown = document.getElementById("startLocation");
+        const endDropdown = document.getElementById("endLocation");
 
-                if (!isNaN(startLat) && !isNaN(startLon) && !isNaN(endLat) && !isNaN(endLon)) {
-                    window.selectedStart = [startLon, startLat];
-                    window.selectedEnd = [endLon, endLat];
+        // Populate dropdowns with landmark names
+        landmarks.forEach(landmark => {{
+            const option1 = document.createElement("option");
+            const option2 = document.createElement("option");
+            option1.value = JSON.stringify([landmark.lat, landmark.lon]);
+            option2.value = JSON.stringify([landmark.lat, landmark.lon]);
+            option1.textContent = landmark.name;
+            option2.textContent = landmark.name;
+            startDropdown.appendChild(option1);
+            endDropdown.appendChild(option2);
+        }});
 
-                    // Update the map with new markers
-                    var startMarker = L.marker(window.selectedStart).addTo(map);
-                    startMarker.bindPopup('Start Location').openPopup();
-
-                    var endMarker = L.marker(window.selectedEnd).addTo(map);
-                    endMarker.bindPopup('End Location').openPopup();
-
-                    // Call Python function to calculate the route
-                    google.colab.kernel.invokeFunction('calc_route', [window.selectedStart, window.selectedEnd], {});
-                } else {
-                    alert("Please enter valid coordinates.");
-                }
-            } else {
-                alert("Please enter both start and end coordinates in the correct format.");
-            }
-        }
+        
     </script>
     """
 
     map.get_root().html.add_child(Element(nav_bar_html))
-
     map.get_root().html.add_child(folium.Element(search_bar_css))
-
     map.save(map_file)
     webbrowser.open('file://' + os.path.realpath(map_file))
 
@@ -408,6 +401,7 @@ def main():
     center_longitude = -91.77618
     zoom_level = 17
     map_file = 'dynamic_map.html'
+    
     init_map(map_file, center_latitude, center_longitude, zoom_level)
     
 if __name__ == '__main__':
