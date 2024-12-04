@@ -7,6 +7,7 @@ import os
 import webbrowser
 from urllib.parse import urlparse, parse_qs
 import requests
+from polyline import decode
 
 PORT = 8000
 
@@ -427,7 +428,6 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
 
         # ROUTE GEOMETRY
         data = response.json()
-        from polyline import decode
         encoded_polyline = data["routes"][0]["geometry"]
         route = decode(encoded_polyline)  # DECODES TO LIST OF [LATITUDEs, LONGITUDES]
 
